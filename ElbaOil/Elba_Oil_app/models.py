@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+LANGUAGE_CHOICES = (
+    ('English', 'English'),
+    ('Albanian', 'Albanian')
+)

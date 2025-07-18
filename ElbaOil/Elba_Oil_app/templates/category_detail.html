@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+<h2>{{ category.name }}</h2>
+<ul>
+  {% for product in products %}
+    <li>
+      <strong>{{ product.name }}</strong><br>
+      {{ product.description }}<br>
+      <img src="{{ product.image.url }}" height="100"><br>
+      ${{ product.price }}
+    </li>
+  {% empty %}
+    <li>No products in this category yet.</li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}ElbaOil{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+<header>
+
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('category-search');
+  const resultsBox = document.getElementById('autocomplete-results');
+
+  searchInput.addEventListener('keyup', () => {
+    const query = searchInput.value;
+    if (query.length < 2) {
+      resultsBox.innerHTML = '';
+      return;
+    }
+
+    fetch(`/ajax/category-autocomplete/?term=${query}`)
+      .then(response => response.json())
+      .then(data => {
+        resultsBox.innerHTML = '';
+        data.forEach(item => {
+          const div = document.createElement('div');
+          div.textContent = item;
+          div.classList.add('autocomplete-item');
+          div.onclick = () => {
+            searchInput.value = item;
+            resultsBox.innerHTML = '';
+          };
+          resultsBox.appendChild(div);
+        });
+      });
+  });
+});
+</script>
+
+
+
+
+
+
+    <h1>ElbaOil</h1>
+    <img src="{% static 'logo.xml' %}" alt="ElbaOil Logo" height="60">
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'products' %}">Products</a>
+        <a href="{% url 'contact' %}">Contact</a>
+    </nav>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

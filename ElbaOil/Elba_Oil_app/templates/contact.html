@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<h2>Kontaktoni</h2>
+
+<p>Nëse keni ndonjë pyetje në lidhje me produktet tona, mundësitë e shpërndarjes ose keni nevojë për mbështetje teknike, do të na pëlqente të na kontaktoni.</p>
+
+<form method="post" action="#">
+    <label for="name">Emri:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="message">Na shkruani:</label><br>
+    <textarea id="message" name="message" rows="6" required></textarea><br><br>
+
+    <button type="submit">Send Message</button>
+</form>
+
+<hr>
+
+<p><strong>Email:</strong> contact@elbaoil.com</p>
+<p><strong>Phone:</strong> +123-456-7890</p>
+<p><strong>Address:</strong> ElbaOil SHA, Elbasan</p>
+{% endblock %}

@@ -3,39 +3,54 @@
 {% block title %}Welcome to ElbaOil{% endblock %}
 
 {% block content %}
-<h2>Premium Engine Oils and Lubricants</h2>
-<p>ElbaOil offers high-quality automotive and industrial oils engineered for performance, durability, and environmental safety.</p>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
 
-<section>
-    <h3>Our Product Categories</h3>
-    <ul>
-        <li>Engine Oils (Synthetic, Semi-Synthetic, Mineral)</li>
-        <li>Transmission & Gear Oils</li>
-        <li>Hydraulic Fluids</li>
-        <li>Greases</li>
-        <li>Specialty Lubricants</li>
+  <!-- Hero Section -->
+  <section class="text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold text-red-600 mb-4">Premium Engine Oils and Lubricants</h2>
+    <p class="text-gray-700 text-lg max-w-2xl mx-auto">
+      ElbaOil offers high-quality automotive and industrial oils engineered for performance, durability, and environmental safety.
+    </p>
+  </section>
+
+  <!-- Product Categories Overview -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-800 mb-4 border-b border-red-500 pb-2">Our Product Categories</h3>
+    <ul class="list-disc list-inside space-y-2 text-gray-700">
+      <li>Engine Oils (Synthetic, Semi-Synthetic, Mineral)</li>
+      <li>Transmission & Gear Oils</li>
+      <li>Hydraulic Fluids</li>
+      <li>Greases</li>
+      <li>Specialty Lubricants</li>
     </ul>
-</section>
+  </section>
 
-<section>
-    <h3>Why Choose Us</h3>
-    <ul>
-        <li>High Performance</li>
-        <li>Long Term Durability</li>
-        <li>Safe for Environment</li>
-        <li>Cost-Effective</li>
+  <!-- Why Choose Us -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-800 mb-4 border-b border-red-500 pb-2">Why Choose Us</h3>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
+      <li class="bg-gray-50 p-4 rounded shadow-sm">High Performance</li>
+      <li class="bg-gray-50 p-4 rounded shadow-sm">Long Term Durability</li>
+      <li class="bg-gray-50 p-4 rounded shadow-sm">Safe for Environment</li>
+      <li class="bg-gray-50 p-4 rounded shadow-sm">Cost-Effective</li>
     </ul>
-</section>
+  </section>
 
-<section>
+  <!-- Dynamic Product Categories -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-800 mb-4 border-b border-red-500 pb-2">Explore Categories</h3>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {% for category in categories %}
+        <li>
+          <a href="{% url 'category_detail' category.slug %}" class="block bg-white border border-gray-200 hover:border-red-500 hover:shadow-md rounded p-4 text-center text-gray-800 font-medium transition duration-300">
+            {{ category.name }}
+          </a>
+        </li>
+      {% empty %}
+        <li class="text-gray-500">No categories available.</li>
+      {% endfor %}
+    </ul>
+  </section>
 
-<h1>Product Categories</h1>
-<ul>
-    {% for category in categories %}
-    <li>
-      <a href="{% url 'category_detail' category.slug %}">{{ category.name }}</a>
-    </li>
-</ul>
-    {% endfor %}
-</section>
+</div>
 {% endblock %}

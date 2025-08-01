@@ -5,61 +5,65 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}ElbaOil{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
+    <!-- <link rel="stylesheet" href="{% static 'style.css' %}"> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
 <body>
 <header>
-
-
-
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchInput = document.getElementById('category-search');
-  const resultsBox = document.getElementById('autocomplete-results');
-
-  searchInput.addEventListener('keyup', () => {
-    const query = searchInput.value;
-    if (query.length < 2) {
-      resultsBox.innerHTML = '';
-      return;
-    }
-
-    fetch(`/ajax/category-autocomplete/?term=${query}`)
-      .then(response => response.json())
-      .then(data => {
-        resultsBox.innerHTML = '';
-        data.forEach(item => {
-          const div = document.createElement('div');
-          div.textContent = item;
-          div.classList.add('autocomplete-item');
-          div.onclick = () => {
-            searchInput.value = item;
-            resultsBox.innerHTML = '';
-          };
-          resultsBox.appendChild(div);
-        });
-      });
-  });
-});
-</script>
-
-
-
-
-
-
-    <h1>ElbaOil</h1>
-    <img src="{% static 'logo.xml' %}" alt="ElbaOil Logo" height="60">
-    <nav>
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'products' %}">Products</a>
-        <a href="{% url 'contact' %}">Contact</a>
-    </nav>
+ 
 </header>
 
-<main>
+<main><!-- Responsive Navbar with Tailwind CSS -->
+  <header class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo and Brand -->
+        <div class="flex items-center space-x-4">
+          <a href="{% url 'home' %}" >
+            <img src="{% static 'logo.png' %}" width="120" alt="Logo of ElbaOil">
+            <!-- <h1 class="text-2xl font-bold text-red-600">ElbaOil</h1> -->
+          </a>
+        </div>
+
+        <!-- Navigation Links (Desktop) -->
+        <nav class="hidden md:flex space-x-6">
+          <a href="{% url 'home' %}" class="text-gray-700 hover:text-red-500 font-medium">Home</a>
+          <a href="{% url 'products' %}" class="text-gray-700 hover:text-red-500 font-medium">Products</a>
+          <a href="{% url 'contact' %}" class="text-gray-700 hover:text-red-500 font-medium">Contact</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-button" class="text-gray-700 hover:text-red-500 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
+      <a href="{% url 'home' %}" class="block text-gray-700 py-2 hover:text-red-500">Home</a>
+      <a href="{% url 'products' %}" class="block text-gray-700 py-2 hover:text-red-500">Products</a>
+      <a href="{% url 'contact' %}" class="block text-gray-700 py-2 hover:text-red-500">Contact</a>
+    </div>
+  </header>
+
     {% block content %}{% endblock %}
 </main>
+
+
+<script>
+  const btn = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
 
 </body>
 </html>

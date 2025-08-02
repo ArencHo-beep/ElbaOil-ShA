@@ -1,56 +1,87 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Welcome to ElbaOil{% endblock %}
 
 {% block content %}
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
 
-  <!-- Hero Section -->
-  <section class="text-center">
-    <h2 class="text-3xl sm:text-4xl font-bold text-red-600 mb-4">Premium Engine Oils and Lubricants</h2>
-    <p class="text-gray-700 text-lg max-w-2xl mx-auto">
-      ElbaOil offers high-quality automotive and industrial oils engineered for performance, durability, and environmental safety.
+<!-- 🔵 HERO SECTION -->
+<section class="relative bg-blue-900 text-white" data-aos="fade-in">
+  <img src="{% static 'images/hero.jpg' %}" alt="Engine Oil Banner"
+       class="absolute inset-0 w-full h-full object-cover opacity-30" />
+  <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 text-center">
+    <h1 class="text-5xl font-extrabold mb-6" data-aos="fade-down" data-aos-delay="100">
+      Premium Engine Oils for Ultimate Performance
+    </h1>
+    <p class="text-lg mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+      ElbaOil delivers cutting-edge lubrication solutions engineered to enhance engine efficiency and protect the environment.
     </p>
-  </section>
+    <a href="{% url 'products' %}"
+       class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded shadow-lg transition-all duration-300 hover:scale-105"
+       data-aos="zoom-in" data-aos-delay="300">
+      Explore Our Products
+    </a>
+  </div>
+</section>
 
-  <!-- Product Categories Overview -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-800 mb-4 border-b border-red-500 pb-2">Our Product Categories</h3>
-    <ul class="list-disc list-inside space-y-2 text-gray-700">
-      <li>Engine Oils (Synthetic, Semi-Synthetic, Mineral)</li>
-      <li>Transmission & Gear Oils</li>
-      <li>Hydraulic Fluids</li>
-      <li>Greases</li>
-      <li>Specialty Lubricants</li>
-    </ul>
-  </section>
+<!-- ⚪ MAIN CONTENT -->
+<div class="bg-white py-16">
+  <div class="max-w-6xl mx-auto px-6 space-y-16">
 
-  <!-- Why Choose Us -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-800 mb-4 border-b border-red-500 pb-2">Why Choose Us</h3>
-    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
-      <li class="bg-gray-50 p-4 rounded shadow-sm">High Performance</li>
-      <li class="bg-gray-50 p-4 rounded shadow-sm">Long Term Durability</li>
-      <li class="bg-gray-50 p-4 rounded shadow-sm">Safe for Environment</li>
-      <li class="bg-gray-50 p-4 rounded shadow-sm">Cost-Effective</li>
-    </ul>
-  </section>
+    <!-- 🛢 PRODUCT CATEGORIES -->
+    <section data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-blue-900 mb-6 border-b-4 border-red-600 inline-block pb-2">
+        Our Product Categories
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {% for category in categories %}
+          <div class="bg-blue-50 hover:bg-blue-100 p-6 rounded shadow transition-all duration-300 hover:shadow-xl hover:scale-105 text-center"
+               data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <img src="{% static 'icons/oil.svg' %}" alt="Icon" class="w-12 h-12 mx-auto mb-4">
+            <h3 class="text-lg font-semibold text-blue-900">{{ category.name }}</h3>
+            <a href="{% url 'category_detail' category.slug %}"
+               class="text-red-600 hover:underline text-sm">
+              View Products →
+            </a>
+          </div>
+        {% empty %}
+          <p class="text-gray-500">No categories available.</p>
+        {% endfor %}
+      </div>
+    </section>
 
-  <!-- Dynamic Product Categories -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-800 mb-4 border-b border-red-500 pb-2">Explore Categories</h3>
-    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {% for category in categories %}
-        <li>
-          <a href="{% url 'category_detail' category.slug %}" class="block bg-white border border-gray-200 hover:border-red-500 hover:shadow-md rounded p-4 text-center text-gray-800 font-medium transition duration-300">
-            {{ category.name }}
-          </a>
-        </li>
-      {% empty %}
-        <li class="text-gray-500">No categories available.</li>
-      {% endfor %}
-    </ul>
-  </section>
+    <!-- ✅ WHY CHOOSE US -->
+    <section data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-blue-900 mb-6 border-b-4 border-red-600 inline-block pb-2">
+        Why Choose ElbaOil
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div class="bg-white border-t-4 border-red-600 rounded shadow p-6 hover:shadow-lg transition-all duration-300"
+               data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <img src="{% static 'icons/check.svg' %}" alt="Check Icon" class="w-10 h-10 mx-auto mb-3">
+            <p class="text-blue-900 font-medium">High Performance</p>
+          </div>
 
+          <div class="bg-white border-t-4 border-red-600 rounded shadow p-6 hover:shadow-lg transition-all duration-300"
+               data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <img src="{% static 'icons/check.svg' %}" alt="Check Icon" class="w-10 h-10 mx-auto mb-3">
+            <p class="text-blue-900 font-medium">Long-Term Durability</p>
+          </div>
+
+          <div class="bg-white border-t-4 border-red-600 rounded shadow p-6 hover:shadow-lg transition-all duration-300"
+               data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <img src="{% static 'icons/check.svg' %}" alt="Check Icon" class="w-10 h-10 mx-auto mb-3">
+            <p class="text-blue-900 font-medium">Eco-Friendly</p>
+          </div>
+
+          <div class="bg-white border-t-4 border-red-600 rounded shadow p-6 hover:shadow-lg transition-all duration-300"
+               data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+            <img src="{% static 'icons/check.svg' %}" alt="Check Icon" class="w-10 h-10 mx-auto mb-3">
+            <p class="text-blue-900 font-medium">Cost-Effective</p>
+          </div>
+      </div>
+    </section>
+
+  </div>
 </div>
+
 {% endblock %}

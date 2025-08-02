@@ -1,28 +1,76 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Contact Us{% endblock %}
 
+
 {% block content %}
-<h2>Kontaktoni</h2>
 
-<p>Nëse keni ndonjë pyetje në lidhje me produktet tona, mundësitë e shpërndarjes ose keni nevojë për mbështetje teknike, do të na pëlqente të na kontaktoni.</p>
+<!-- 🟦 CONTACT SECTION -->
+<section class="bg-gray-100 py-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-blue-900 mb-4">Kontaktoni</h2>
+      <p class="text-gray-700 text-lg max-w-2xl mx-auto">
+        Nëse keni ndonjë pyetje në lidhje me produktet tona, mundësitë e shpërndarjes ose keni nevojë për mbështetje teknike, do të na pëlqente të na kontaktoni.
+      </p>
+    </div>
 
-<form method="post" action="#">
-    <label for="name">Emri:</label><br>
-    <input type="text" id="name" name="name" required><br><br>
+    <div class="grid md:grid-cols-2 gap-12 bg-white p-10 rounded-lg shadow-lg">
+      
+      <!-- Contact Form -->
+      <form method="post" action="#" class="space-y-6">
+        {% csrf_token %}
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Emri</label>
+          <input type="text" id="name" name="name" required
+                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-600 focus:border-blue-600">
+        </div>
 
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email" name="email" required
+                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-600 focus:border-blue-600">
+        </div>
 
-    <label for="message">Na shkruani:</label><br>
-    <textarea id="message" name="message" rows="6" required></textarea><br><br>
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700">Na shkruani</label>
+          <textarea id="message" name="message" rows="5" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-600 focus:border-blue-600"></textarea>
+        </div>
 
-    <button type="submit">Send Message</button>
-</form>
+        <button type="submit"
+                class="bg-blue-900 hover:bg-blue-800 text-white font-semibold py-2 px-6 rounded shadow-md transition duration-300">
+          Dërgo Mesazh
+        </button>
+      </form>
 
-<hr>
+      <!-- Contact Info -->
+      <div class="space-y-6">
+        <div class="flex items-start space-x-4">
+          <img width="48" height="48" src="https://img.icons8.com/color/48/gmail--v1.png" alt="gmail--v1"/>
+          <div>
+            <p class="text-gray-700 font-semibold">Email</p>
+            <p class="text-gray-600">contact@elbaoil.com</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <img width="48" height="48" src="https://img.icons8.com/emoji/48/telephone-receiver.png" alt="telephone-receiver"/>
+          <div>
+            <p class="text-gray-700 font-semibold">Cel</p>
+            <p class="text-gray-600">+123-456-7890</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <img width="48" height="48" src="https://img.icons8.com/emoji/48/round-pushpin-emoji.png" alt="round-pushpin-emoji"/>
+          <div>
+            <p class="text-gray-700 font-semibold">Adresa</p>
+            <p class="text-gray-600">ElbaOil SHA, Elbasan</p>
+          </div>
+        </div>
+      </div>
 
-<p><strong>Email:</strong> contact@elbaoil.com</p>
-<p><strong>Phone:</strong> +123-456-7890</p>
-<p><strong>Address:</strong> ElbaOil SHA, Elbasan</p>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

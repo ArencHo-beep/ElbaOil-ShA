@@ -33,3 +33,30 @@ def category_detail(request, slug):
     products = category.products.all()
     return render(request, 'category_detail.html', {'category': category, 'products': products})
 
+def search_view(request):
+    query = request.GET.get('q', '')
+    category_id = request.GET.get('category', '')
+
+    products = Product.objects.all()
+    if query:
+        products = products.filter(name__icontains=query)
+
+    if category_id:
+        products = products.filter(category__id=category_id)
+
+    categories = Category.objects.all()
+    return render(request, 'search_results.html', {
+        'query': query,
+        'results': products,
+        'categories': categories,
+        'selected_category': category_id
+    })
+
+def search_suggestions(request):
+    query = request.GET.get('term', '')
+    results = []
+    if query:
+        matches = Product.objects.filter(name__icontains=query)[:5]
+        results = [{'label': p.name, 'id': p.id} for p in matches]
+    return JsonResponse(results, safe=False)
+

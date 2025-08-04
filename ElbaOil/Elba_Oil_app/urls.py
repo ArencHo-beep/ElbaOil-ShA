@@ -8,4 +8,6 @@ urlpatterns = [
     path('category/<slug:slug>/', views.category_detail, name='category_detail'),
     # path('search/', views.category_search, name='category_search'),
     path('ajax/category-autocomplete/', views.category_autocomplete, name='category_autocomplete'),
+    path('search/', views.search_view, name='search'),
+    path('ajax/search_suggestions/', views.search_suggestions, name='search_suggestions'),
 ]

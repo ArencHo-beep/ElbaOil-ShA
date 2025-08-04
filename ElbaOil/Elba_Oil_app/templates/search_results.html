@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto p-6">
+  <h2 class="text-2xl font-bold mb-4">Search Results for "{{ query }}"</h2>
+
+  {% if results %}
+    <ul class="grid md:grid-cols-2 gap-6">
+      {% for item in results %}
+        <li class="border p-4 rounded shadow hover:shadow-md transition">
+          <h3 class="text-xl font-semibold">{{ item.name }}</h3>
+          <p class="text-gray-600">{{ item.description|truncatewords:20 }}</p>
+          <!-- Add price, image, etc. as needed -->
+        </li>
+
+<form method="get" action="{% url 'search' %}" class="mb-4 flex flex-col sm:flex-row gap-4 items-center">
+  <input type="text" name="q" placeholder="Search..." value="{{ query }}"
+         class="px-2 py-1 border border-gray-300 rounded-md w-full sm:w-auto">
+
+  <select name="category" class="border px-2 py-1 rounded-md">
+    <option value="">All Categories</option>
+    {% for cat in categories %}
+      <option value="{{ cat.id }}" {% if selected_category == cat.id|stringformat:"s" %}selected{% endif %}>
+        {{ cat.name }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <button type="submit" class="px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600">
+    Filter
+  </button>
+</form>
+
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-gray-500">No results found.</p>
+  {% endif %}
+</div>
+{% endblock %}

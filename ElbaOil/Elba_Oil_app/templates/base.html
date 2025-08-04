@@ -25,12 +25,24 @@
           </a>
         </div>
 
-        <!-- Navigation Links (Desktop) -->
-        <nav class="hidden md:flex space-x-6">
-          <a href="{% url 'home' %}" class="text-gray-700 hover:text-red-500 font-medium">Home</a>
-          <a href="{% url 'products' %}" class="text-gray-700 hover:text-red-500 font-medium">Products</a>
-          <a href="{% url 'contact' %}" class="text-gray-700 hover:text-red-500 font-medium">Contact</a>
-        </nav>
+        
+        <!-- Navigation Links and Search (Desktop) -->
+  <nav class="hidden md:flex items-center space-x-6">
+  <a href="{% url 'home' %}" class="text-gray-700 hover:text-red-500 font-medium">Home</a>
+  <a href="{% url 'products' %}" class="text-gray-700 hover:text-red-500 font-medium">Products</a>
+  <a href="{% url 'contact' %}" class="text-gray-700 hover:text-red-500 font-medium">Contact</a>
+
+  <!-- Search Form -->
+  <form action="{% url 'search' %}" method="get" class="relative flex items-center ml-4">
+    <input type="text" name="q" placeholder="Search..." 
+           class="px-2 py-1 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-red-400"
+           autocomplete="off">
+    <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-r-md hover:bg-red-600">
+      Search
+    </button>
+  </form>
+</nav>
+
 
         <!-- Mobile Menu Button -->
         <div class="md:hidden flex items-center">
@@ -45,11 +57,21 @@
     </div>
 
     <!-- Mobile Menu (Hidden by default) -->
-    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
-      <a href="{% url 'home' %}" class="block text-gray-700 py-2 hover:text-red-500">Home</a>
-      <a href="{% url 'products' %}" class="block text-gray-700 py-2 hover:text-red-500">Products</a>
-      <a href="{% url 'contact' %}" class="block text-gray-700 py-2 hover:text-red-500">Contact</a>
-    </div>
+<div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+  <a href="{% url 'home' %}" class="block text-gray-700 py-2 hover:text-red-500">Kryefaqe</a>
+  <a href="{% url 'products' %}" class="block text-gray-700 py-2 hover:text-red-500">Produkte</a>
+  <a href="{% url 'contact' %}" class="block text-gray-700 py-2 hover:text-red-500">Kontakt</a>
+
+  <!-- Mobile Search -->
+  <form action="{% url 'search' %}" method="get" class="flex space-x-2 mt-2">
+    <input type="text" name="q" placeholder="Kerko..."
+           class="flex-1 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
+           autocomplete="off">
+    <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">
+      Go
+    </button>
+  </form>
+</div>
   </header>
 
     {% block content %}{% endblock %}
@@ -71,6 +93,61 @@
     duration: 800,
     once: true
   });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.querySelector('input[name="q"]');
+
+  if (searchInput) {
+    const suggestionBox = document.createElement('div');
+    suggestionBox.className = 'absolute bg-white border rounded shadow z-50 w-full';
+    suggestionBox.style.display = 'none';
+    searchInput.parentNode.appendChild(suggestionBox);
+
+    let timeout = null;
+
+    searchInput.addEventListener('input', () => {
+      clearTimeout(timeout);
+      const query = searchInput.value.trim();
+      if (query.length < 2) {
+        suggestionBox.style.display = 'none';
+        return;
+      }
+
+      timeout = setTimeout(() => {
+        fetch(`/ajax/search_suggestions/?term=${encodeURIComponent(query)}`)
+          .then(response => response.json())
+          .then(data => {
+            suggestionBox.innerHTML = '';
+            if (data.length === 0) {
+              suggestionBox.style.display = 'none';
+              return;
+            }
+
+            data.forEach(item => {
+              const div = document.createElement('div');
+              div.className = 'px-4 py-2 hover:bg-gray-100 cursor-pointer';
+              div.textContent = item.label;
+              div.onclick = () => {
+                searchInput.value = item.label;
+                suggestionBox.style.display = 'none';
+                searchInput.form.submit();
+              };
+              suggestionBox.appendChild(div);
+            });
+            suggestionBox.style.display = 'block';
+          });
+      }, 300);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!suggestionBox.contains(e.target)) {
+        suggestionBox.style.display = 'none';
+      }
+    });
+  }
+});
+
 </script>
 
 </body>

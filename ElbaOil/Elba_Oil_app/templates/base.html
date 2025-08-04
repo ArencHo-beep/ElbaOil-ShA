@@ -28,17 +28,17 @@
         
         <!-- Navigation Links and Search (Desktop) -->
   <nav class="hidden md:flex items-center space-x-6">
-  <a href="{% url 'home' %}" class="text-gray-700 hover:text-red-500 font-medium">Home</a>
-  <a href="{% url 'products' %}" class="text-gray-700 hover:text-red-500 font-medium">Products</a>
-  <a href="{% url 'contact' %}" class="text-gray-700 hover:text-red-500 font-medium">Contact</a>
+  <a href="{% url 'home' %}" class="text-gray-700 hover:text-red-500 font-medium">Kryefaqe</a>
+  <a href="{% url 'products' %}" class="text-gray-700 hover:text-red-500 font-medium">Produkte</a>
+  <a href="{% url 'contact' %}" class="text-gray-700 hover:text-red-500 font-medium">Kontakt</a>
 
   <!-- Search Form -->
   <form action="{% url 'search' %}" method="get" class="relative flex items-center ml-4">
-    <input type="text" name="q" placeholder="Search..." 
+    <input type="text" name="q" placeholder="Kerko..." 
            class="px-2 py-1 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-red-400"
            autocomplete="off">
     <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-r-md hover:bg-red-600">
-      Search
+      Kerko
     </button>
   </form>
 </nav>

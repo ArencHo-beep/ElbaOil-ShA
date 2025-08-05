@@ -5,20 +5,20 @@
 {% block content %}
 
 <!-- 🔵 HERO SECTION -->
-<section class="relative bg-blue-900 text-white" data-aos="fade-in">
-  <img src="{% static 'images/hero.jpg' %}" alt="Engine Oil Banner"
+<section class="relative bg-blue-800 text-white" data-aos="fade-in">
+  <img src="{% static 'engine_oil_banner.jpg' %}" alt="Engine Oil Banner"
        class="absolute inset-0 w-full h-full object-cover opacity-30" />
   <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 text-center">
     <h1 class="text-5xl font-extrabold mb-6" data-aos="fade-down" data-aos-delay="100">
-      Premium Engine Oils for Ultimate Performance
+      Vajra Premium Për Performancë Unike
     </h1>
     <p class="text-lg mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-      ElbaOil delivers cutting-edge lubrication solutions engineered to enhance engine efficiency and protect the environment.
+      ElbaOil ofron zgjidhje lubrifikimi të teknologjisë së fundit, të projektuara për të rritur efikasitetin e motorrit dhe për të mbrojtur mjedisin.
     </p>
     <a href="{% url 'products' %}"
        class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded shadow-lg transition-all duration-300 hover:scale-105"
        data-aos="zoom-in" data-aos-delay="300">
-      Explore Our Products
+      Produktet Tona
     </a>
   </div>
 </section>
@@ -30,17 +30,17 @@
     <!-- 🛢 PRODUCT CATEGORIES -->
     <section data-aos="fade-up">
       <h2 class="text-3xl font-bold text-blue-900 mb-6 border-b-4 border-red-600 inline-block pb-2">
-        Our Product Categories
+        Produktet
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {% for category in categories %}
           <div class="bg-blue-50 hover:bg-blue-100 p-6 rounded shadow transition-all duration-300 hover:shadow-xl hover:scale-105 text-center"
                data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:1 }}00">
-            <img src="{% static 'icons/oil.svg' %}" alt="Icon" class="w-12 h-12 mx-auto mb-4">
+            <img src="{% static 'icons/category.svg' %}" alt="Icon" class="w-12 h-12 mx-auto mb-4">
             <h3 class="text-lg font-semibold text-blue-900">{{ category.name }}</h3>
             <a href="{% url 'category_detail' category.slug %}"
                class="text-red-600 hover:underline text-sm">
-              View Products →
+              Shiko Produktet →
             </a>
           </div>
         {% empty %}
@@ -52,31 +52,31 @@
     <!-- ✅ WHY CHOOSE US -->
     <section data-aos="fade-up">
       <h2 class="text-3xl font-bold text-blue-900 mb-6 border-b-4 border-red-600 inline-block pb-2">
-        Why Choose ElbaOil
+        Pse të zgjidhni ElbaOil
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div class="bg-white border-t-4 border-red-600 rounded shadow p-6 hover:shadow-lg transition-all duration-300"
                data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
-            <img src="{% static 'icons/check.svg' %}" alt="Check Icon" class="w-10 h-10 mx-auto mb-3">
-            <p class="text-blue-900 font-medium">High Performance</p>
+            <img width="50" height="50" src="https://img.icons8.com/ios/50/total-sales-1.png" alt="total-sales-1"/>
+            <p class="text-blue-900 font-medium">Performancë e lartë</p>
           </div>
 
           <div class="bg-white border-t-4 border-red-600 rounded shadow p-6 hover:shadow-lg transition-all duration-300"
                data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
-            <img src="{% static 'icons/check.svg' %}" alt="Check Icon" class="w-10 h-10 mx-auto mb-3">
-            <p class="text-blue-900 font-medium">Long-Term Durability</p>
+            <img width="50" height="50" src="https://img.icons8.com/ios/50/sustainability--v1.png" alt="sustainability--v1"/>
+            <p class="text-blue-900 font-medium">Qëndrueshmëri afatgjatë</p>
           </div>
 
           <div class="bg-white border-t-4 border-red-600 rounded shadow p-6 hover:shadow-lg transition-all duration-300"
                data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
-            <img src="{% static 'icons/check.svg' %}" alt="Check Icon" class="w-10 h-10 mx-auto mb-3">
-            <p class="text-blue-900 font-medium">Eco-Friendly</p>
+            <img width="50" height="50" src="https://img.icons8.com/ios/50/eco-driving-indicator.png" alt="eco-driving-indicator"/>
+            <p class="text-blue-900 font-medium">Eco-Miqësor</p>
           </div>
 
           <div class="bg-white border-t-4 border-red-600 rounded shadow p-6 hover:shadow-lg transition-all duration-300"
                data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
-            <img src="{% static 'icons/check.svg' %}" alt="Check Icon" class="w-10 h-10 mx-auto mb-3">
-            <p class="text-blue-900 font-medium">Cost-Effective</p>
+            <img width="80" height="80" src="https://img.icons8.com/dotty/80/guarantee.png" alt="guarantee"/>
+            <p class="text-blue-900 font-medium">Kosto-Efektive</p>
           </div>
       </div>
     </section>

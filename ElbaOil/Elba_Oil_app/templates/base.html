@@ -5,150 +5,106 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}ElbaOil{% endblock %}</title>
-    <!-- <link rel="stylesheet" href="{% static 'style.css' %}"> -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-  </head>
+</head>
 
 <body>
-
-<main><!-- Responsive Navbar with Tailwind CSS -->
+<main>
   <header class="bg-white shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
-        <!-- Logo and Brand -->
         <div class="flex items-center space-x-4 ml-6">
-          <a href="{% url 'home' %}" >
+          <a href="{% url 'home' %}">
             <img src="{% static 'ElbaOil_logo.png' %}" width="150" alt="Logo of ElbaOil">
-            <!-- <h1 class="text-2xl font-bold text-red-600">ElbaOil</h1> -->
           </a>
         </div>
 
-        
-        <!-- Navigation Links and Search (Desktop) -->
-  <nav class="hidden md:flex items-center space-x-6">
-  <a href="{% url 'home' %}" class="text-gray-700 hover:text-red-500 font-medium">Kryefaqe</a>
-  <a href="{% url 'products' %}" class="text-gray-700 hover:text-red-500 font-medium">Produkte</a>
-  <a href="{% url 'contact' %}" class="text-gray-700 hover:text-red-500 font-medium">Kontakt</a>
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="{% url 'home' %}" class="text-gray-700 hover:text-red-500 font-medium">Kryefaqe</a>
+          <a href="{% url 'products' %}" class="text-gray-700 hover:text-red-500 font-medium">Produkte</a>
+          <a href="{% url 'contact' %}" class="text-gray-700 hover:text-red-500 font-medium">Kontakt</a>
+          <form action="{% url 'search' %}" method="get" class="relative flex items-center ml-4">
+            <input type="text" name="q" placeholder="Kërko..."
+                   class="px-2 py-1 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-red-400"
+                   autocomplete="off">
+            <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-r-md hover:bg-red-600">
+              Kërko
+            </button>
+          </form>
+        </nav>
 
-  <!-- Search Form -->
-  <form action="{% url 'search' %}" method="get" class="relative flex items-center ml-4">
-    <input type="text" name="q" placeholder="Kerko..." 
-           class="px-2 py-1 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-red-400"
-           autocomplete="off">
-    <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-r-md hover:bg-red-600">
-      Kerko
-    </button>
-  </form>
-</nav>
-
-
-        <!-- Mobile Menu Button -->
         <div class="md:hidden flex items-center">
           <button id="mobile-menu-button" class="text-gray-700 hover:text-red-500 focus:outline-none">
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Mobile Menu (Hidden by default) -->
-<div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
-  <a href="{% url 'home' %}" class="block text-gray-700 py-2 hover:text-red-500">Kryefaqe</a>
-  <a href="{% url 'products' %}" class="block text-gray-700 py-2 hover:text-red-500">Produkte</a>
-  <a href="{% url 'contact' %}" class="block text-gray-700 py-2 hover:text-red-500">Kontakt</a>
-
-  <!-- Mobile Search -->
-  <form action="{% url 'search' %}" method="get" class="flex space-x-2 mt-2">
-    <input type="text" name="q" placeholder="Kerko..."
-           class="flex-1 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
-           autocomplete="off">
-    <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">
-      Go
-    </button>
-  </form>
-</div>
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a href="{% url 'home' %}" class="block text-gray-700 py-2 hover:text-red-500">Kryefaqe</a>
+      <a href="{% url 'products' %}" class="block text-gray-700 py-2 hover:text-red-500">Produkte</a>
+      <a href="{% url 'contact' %}" class="block text-gray-700 py-2 hover:text-red-500">Kontakt</a>
+      <form action="{% url 'search' %}" method="get" class="flex space-x-2 mt-2">
+        <input type="text" name="q" placeholder="Kërko..."
+               class="flex-1 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
+               autocomplete="off">
+        <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">
+          Kërko
+        </button>
+      </form>
+    </div>
   </header>
 
-    {% block content %}{% endblock %}
+  {% block content %}{% endblock %}
 </main>
 
+<footer class="bg-gray-100 py-6 mt-12 text-center">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col items-center">
+      <div class="mb-2 text-gray-600">&copy; <span id="year"></span> ElbaOil. Të gjitha të drejtat e rezervuara.</div>
+      <div class="flex space-x-4">
+        <a href="https://www.facebook.com/" target="_blank" class="text-gray-600 hover:text-red-500">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22 12c0-5.522-4.478-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.877v-6.987H7.898v-2.89h2.54V9.845c0-2.506 1.493-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 16.991 22 12z" />
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" class="text-gray-600 hover:text-red-500">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.75 2A5.75 5.75 0 0 0 2 7.75v8.5A5.75 5.75 0 0 0 7.75 22h8.5A5.75 5.75 0 0 0 22 16.25v-8.5A5.75 5.75 0 0 0 16.25 2h-8.5zm0 1.5h8.5A4.25 4.25 0 0 1 20.5 7.75v8.5a4.25 4.25 0 0 1-4.25 4.25h-8.5a4.25 4.25 0 0 1-4.25-4.25v-8.5A4.25 4.25 0 0 1 7.75 3.5zm4.25 3.25a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5zm0 1.5a3.75 3.75 0 1 1 0 7.5 3.75 3.75 0 0 1 0-7.5zm5.5-.75a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5z"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/355692030282" target="_blank" class="text-gray-600 hover:text-red-500">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 32 32">
+            <path d="M16 2.933c-7.28 0-13.2 5.92-13.2 13.2 0 2.32.6 4.52 1.72 6.48l-1.8 6.48 6.68-1.76c1.84 1 3.92 1.52 6.12 1.52 7.28 0 13.2-5.92 13.2-13.2S23.28 2.933 16 2.933zm0 23.68c-1.88 0-3.72-.52-5.32-1.48l-.38-.22-3.96 1.04 1.06-3.86-.24-.4c-1.08-1.72-1.66-3.7-1.66-5.74 0-5.88 4.78-10.66 10.66-10.66s10.66 4.78 10.66 10.66c0 5.88-4.78 10.66-10.66 10.66zm5.88-7.92c-.32-.16-1.9-.94-2.2-1.06-.3-.12-.52-.16-.74.16s-.86 1.06-1.06 1.28c-.          ...s-.38.24-.7.08c-.32-.16-1.26-.46-2.4-1.48-.88-.78-1.48-1.74-1.64-2.02-.16-.28-.02-.44.12-.6.12-.12.28-.32.42-.48.14-.16.18-.28.28-.46s.06-.34-.02-.48c-.08-.14-.74-1.78-1.02-2.44-.26-.64-.52-.54-.74-.54s-.4-.02-.62-.02c-.22 0-.58.08-.88.4s-1.16 1.12-1.16 2.72 1.2 3.16 1.36 3.38c.16.22 2.34 3.56 5.68 5c.8.34 1.42.54 1.9.7.8.26 1.54.22 2.12.14.64-.1 1.9-.78 2.18-1.54.26-.76.26-1.4.18-1.54-.08-.14-.3-.22-.62-.38z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="goUpBtn" class="fixed bottom-6 right-6 p-3 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 focus:outline-none">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
 
 <script>
   const btn = document.getElementById('mobile-menu-button');
   const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => menu.classList.toggle('hidden'));
 
-  btn.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
-  });
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const goUpBtn = document.getElementById('goUpBtn');
+  goUpBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
-
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 800,
-    once: true
-  });
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  const searchInput = document.querySelector('input[name="q"]');
-
-  if (searchInput) {
-    const suggestionBox = document.createElement('div');
-    suggestionBox.className = 'absolute bg-white border rounded shadow z-50 w-full';
-    suggestionBox.style.display = 'none';
-    searchInput.parentNode.appendChild(suggestionBox);
-
-    let timeout = null;
-
-    searchInput.addEventListener('input', () => {
-      clearTimeout(timeout);
-      const query = searchInput.value.trim();
-      if (query.length < 2) {
-        suggestionBox.style.display = 'none';
-        return;
-      }
-
-      timeout = setTimeout(() => {
-        fetch(`/ajax/search_suggestions/?term=${encodeURIComponent(query)}`)
-          .then(response => response.json())
-          .then(data => {
-            suggestionBox.innerHTML = '';
-            if (data.length === 0) {
-              suggestionBox.style.display = 'none';
-              return;
-            }
-
-            data.forEach(item => {
-              const div = document.createElement('div');
-              div.className = 'px-4 py-2 hover:bg-gray-100 cursor-pointer';
-              div.textContent = item.label;
-              div.onclick = () => {
-                searchInput.value = item.label;
-                suggestionBox.style.display = 'none';
-                searchInput.form.submit();
-              };
-              suggestionBox.appendChild(div);
-            });
-            suggestionBox.style.display = 'block';
-          });
-      }, 300);
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!suggestionBox.contains(e.target)) {
-        suggestionBox.style.display = 'none';
-      }
-    });
-  }
-});
-
-</script>
-
+<script>AOS.init({ duration: 800, once: true });</script>
 </body>
 </html>
+

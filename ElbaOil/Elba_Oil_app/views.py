@@ -30,7 +30,8 @@ def home(request):
 
 def category_detail(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    products = category.products.all()
+    products = Product.objects.filter(category=category)
+    print(products)
     return render(request, 'category_detail.html', {'category': category, 'products': products})
 
 def search_view(request):

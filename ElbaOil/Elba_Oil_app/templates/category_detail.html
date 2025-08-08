@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+
+{% block content %}
 <h2>{{ category.name }}</h2>
 <ul>
   {% for product in products %}
@@ -12,3 +14,5 @@
     <li>No products in this category yet.</li>
   {% endfor %}
 </ul>
+
+{% endblock %}

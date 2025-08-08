@@ -32,36 +32,31 @@
   <h2 class="text-3xl font-bold text-blue-900 mb-6 border-b-4 border-red-600 inline-block pb-2">
     Produktet
   </h2>
-{% for category in categories %}
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <a href="{% url 'category_detail' 'vajra' %}">
+              
         <div class="block group hover:shadow-2xl transition duration-300 rounded-2xl overflow-hidden bg-white shadow-lg">
             <h1 class="text-3xl font-bold text-[#15340B] mb-4">Vajra</h1>
             <img
              class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
              src="https://www.nis.rs/wp-content/uploads/2019/12/foto-nisotec-635x485.jpg" alt="Vajra">
 
-             <h3 class="text-lg font-semibold text-blue-900">{{ category.name }}</h3>
-            <a href="{% url 'category_detail' category.slug %}"
-               class="text-red-600 hover:underline text-sm">
-              Shiko Produktet →
-            </a>
+             <h3 class="text-lg font-semibold text-blue-900"></h3>
+            
         </div>
-
-  <div class="block group hover:shadow-2xl hover:scale-105 transition duration-300 rounded-2xl overflow-hidden bg-white shadow-lg">
+            </a>
+      
+    <a href="{% url 'category_detail' 'filtra' %}"
+               class="text-red-600 hover:underline text-sm">
+                   
+      <div class="block group hover:shadow-2xl hover:scale-105 transition duration-300 rounded-2xl overflow-hidden bg-white shadow-lg">
             <h1 class="text-3xl font-bold text-[#15340B] mb-4">Filtra</h1>
             <img 
                 class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                 src="https://massmanautomation.com/content/uploads/2020/07/Filters-1024x547.png" alt="Filtra">
-
-                 <h3 class="text-lg font-semibold text-blue-900">{{ category.name }}</h3>
-            <a href="{% url 'category_detail' category.slug %}"
-               class="text-red-600 hover:underline text-sm">
-              Shiko Produktet →
-            </a>
-        </div>
-    {% empty %}
-      <p class="text-gray-500">Nuk ka kategori në dispozicion.</p>
-    {% endfor %}
+                 <h3 class="text-lg font-semibold text-blue-900"></h3>            
+      </div>
+    </a> 
   </div>
 </section>
 
